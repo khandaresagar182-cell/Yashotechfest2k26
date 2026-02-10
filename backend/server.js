@@ -28,9 +28,14 @@ sequelize.sync({ alter: true }) // Sync schema changes (removed unique constrain
     .catch((err) => console.error('❌ Database Connection Error:', err));
 
 // Routes
-app.use('/api/registration', require('./routes/registration'));
+const registrationRoutes = require('./routes/registration');
+const paymentRoutes = require('./routes/payment');
+const exportRoutes = require('./routes/export');
+
+app.use('/api/registration', registrationRoutes);
+app.use('/api/payment', paymentRoutes);
+app.use('/api/export', exportRoutes);
 // app.use('/api/admin', require('./routes/admin')); // Admin Dashboard Removed
-// app.use('/api/payment', require('./routes/payment')); // Integrated into registration
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
