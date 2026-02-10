@@ -23,7 +23,7 @@ const sequelize = require('./config/database');
 
 console.log('Syncing database...');
 // Sync Database
-sequelize.sync({ alter: false }) // Don't alter existing tables to avoid index limit issues
+sequelize.sync({ alter: true }) // Sync schema changes (removed unique constraints on email/phone)
     .then(() => console.log('✅ MySQL Database Connected & Synced'))
     .catch((err) => console.error('❌ Database Connection Error:', err));
 

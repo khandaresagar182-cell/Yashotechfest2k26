@@ -77,6 +77,22 @@ router.post('/create', async (req, res) => {
         });
     } catch (error) {
         console.error('Registration error:', error);
+
+        // Handle Sequelize validation errors specifically
+        if (error.name === 'SequelizeUniqueConstraintError') {
+            return res.status(400).json({
+                error: true,
+                message: 'This email or phone number is already registered for this event.'
+            });
+        }
+        if (error.name === 'SequelizeValidationError') {
+            const messages = error.errors.map(e => e.message).join(', ');
+            return res.status(400).json({
+                error: true,
+                message: messages || 'Validation failed. Please check your input.'
+            });
+        }
+
         res.status(500).json({
             error: true,
             message: error.message || 'Failed to create registration'

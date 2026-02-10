@@ -58,7 +58,6 @@ const Registration = sequelize.define('Registration', {
     email: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
         validate: {
             isEmail: true
         }
@@ -66,7 +65,6 @@ const Registration = sequelize.define('Registration', {
     phone: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
         validate: {
             isNumeric: true,
             len: [10, 10]
