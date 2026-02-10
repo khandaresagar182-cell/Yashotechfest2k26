@@ -1,0 +1,182 @@
+.registration-cta {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+}
+
+.cta-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 24px;
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    align-items: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.qr-section {
+    display: flex;
+    justify-content: center;
+}
+
+.qr-box {
+    text-align: center;
+}
+
+.qr-placeholder {
+    background: #fef3c7;
+    padding: 2rem;
+    border-radius: 16px;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.qr-code {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.qr-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    width: 120px;
+    height: 120px;
+}
+
+.qr-cell {
+    background: #1e3a8a;
+    border-radius: 2px;
+}
+
+.qr-cell:nth-child(odd) {
+    background: #1e3a8a;
+}
+
+.qr-cell:nth-child(even) {
+    background: transparent;
+}
+
+.qr-label {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 0.5rem;
+}
+
+.entrance-fee {
+    font-size: 0.85rem;
+    color: #64748b;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.cta-content {
+    padding-left: 2rem;
+}
+
+.cta-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #1e3a8a;
+    margin-bottom: 1rem;
+}
+
+.cta-description {
+    font-size: 1.1rem;
+    color: #475569;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-register {
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 16px rgba(30, 58, 138, 0.3);
+}
+
+.btn-register:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(30, 58, 138, 0.4);
+}
+
+.btn-brochure {
+    background: white;
+    color: #1e3a8a;
+    border: 2px solid #e2e8f0;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-brochure:hover {
+    border-color: #1e3a8a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 968px) {
+    .cta-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .cta-content {
+        padding-left: 0;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .registration-cta {
+        padding: 2rem 1rem;
+    }
+
+    .cta-container {
+        padding: 1.5rem;
+        border-radius: 16px;
+    }
+
+    .cta-title {
+        font-size: 1.75rem;
+        text-align: center;
+    }
+
+    .cta-description {
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .qr-grid {
+        width: 100px;
+        height: 100px;
+    }
+
+    .btn-register,
+    .btn-brochure {
+        width: 100%;
+        text-align: center;
+    }
+}

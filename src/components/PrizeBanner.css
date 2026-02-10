@@ -1,0 +1,58 @@
+.prize-banner {
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    padding: 1.25rem 2rem;
+    color: white;
+}
+
+.prize-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.star {
+    font-size: 1.5rem;
+    color: #facc15;
+    animation: twinkle 1.5s ease-in-out infinite;
+}
+
+.prize-text {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.6;
+        transform: scale(1.2);
+    }
+}
+
+@media (max-width: 768px) {
+    .prize-content {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .prize-text {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
+    .star {
+        display: none;
+        /* Hide stars on small mobile to save space, or keep if preferred */
+    }
+}

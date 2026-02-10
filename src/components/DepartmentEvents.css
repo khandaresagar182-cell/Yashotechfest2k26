@@ -1,0 +1,450 @@
+.department-events {
+    padding: 2rem 1rem;
+    background: #f8fafc;
+}
+
+.events-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.dept-section {
+    margin-bottom: 4rem;
+}
+
+.dept-header-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.dept-section-icon {
+    font-size: 1.2rem;
+    padding: 0.4rem;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dept-section-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1e3a8a;
+}
+
+.dept-underline {
+    height: 4px;
+    width: 80px;
+    border-radius: 2px;
+    margin-bottom: 2rem;
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+/* New Event Card Design */
+.event-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    border: 1px solid #f1f5f9;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.event-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.event-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.event-icon-box {
+    width: 40px;
+    height: 40px;
+    background: #eff6ff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: #1e3a8a;
+    font-weight: 700;
+}
+
+.event-tag {
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+}
+
+.event-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+}
+
+.event-desc {
+    font-size: 0.85rem;
+    color: #64748b;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+}
+
+.event-rules-link {
+    width: fit-content;
+    gap: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #4f46e5;
+    background-color: rgba(238, 242, 255, 0.4);
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 0.5px solid rgba(199, 210, 254, 0.3);
+    backdrop-filter: blur(2px);
+}
+
+.event-rules-link:hover {
+    background-color: rgba(224, 231, 255, 0.6);
+    color: #4338ca;
+    transform: translateY(-1px);
+}
+
+.event-coords {
+    margin-bottom: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #f1f5f9;
+}
+
+.coord-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.35rem;
+}
+
+.coord-icon {
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+.coord-text {
+    font-size: 0.75rem;
+    color: #475569;
+}
+
+.coord-role {
+    font-weight: 600;
+    color: #94a3b8;
+}
+
+.event-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.event-price {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.btn-register {
+    background: #1e3a8a;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.25rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-register:hover {
+    background: #1e40af;
+}
+
+@media (max-width: 640px) {
+    .events-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .event-card {
+        padding: 1rem;
+    }
+
+    .dept-section-title {
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .department-events {
+        padding: 2rem 0.5rem;
+        /* Tighter padding for very small screens */
+    }
+
+    .event-card-top {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+/* AIML Specific Background Logo */
+.aiml-event-card {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.aiml-event-card::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    background-image: url('../assets/aiml_logo.png');
+    /* Ensure this file exists */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.25;
+    /* Increased opacity as requested */
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Remove the separator line for AIML cards to look cleaner over the logo */
+.aiml-event-card .event-coords {
+    border-top: none;
+}
+
+/* Computer Engineering ACES Logo - Applied to Computer, Civil, and Mechanical Departments */
+.comp-eng-event-card {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.comp-eng-event-card::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    background-image: url('../assets/comp_eng_logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.25;
+    /* Same opacity as AIML logo */
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Remove the separator line for Computer Engineering cards */
+.comp-eng-event-card .event-coords {
+    border-top: none;
+}
+
+/* Mechanical Engineering MESA Logo */
+.mechanical-event-card {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.mechanical-event-card::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 60%;
+    background-image: url('../assets/mechanical_logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.25;
+    /* Same opacity as AIML and Computer Engineering logos */
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Remove the separator line for Mechanical Engineering cards */
+.mechanical-event-card .event-coords {
+    border-top: none;
+}
+
+/* Information Technology Logo */
+.it-event-card {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.it-event-card::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 60%;
+    background-image: url('../assets/it_logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.25;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Remove the separator line for IT cards */
+.it-event-card .event-coords {
+    border-top: none;
+}
+
+/* Electrical Engineering Logo */
+.electrical-event-card {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.electrical-event-card::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 60%;
+    background-image: url('../assets/electrical_logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.25;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Remove the separator line for Electrical cards */
+.electrical-event-card .event-coords {
+    border-top: none;
+}
+
+/* E & TC Department Logo */
+.entc-event-card {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.entc-event-card::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 60%;
+    background-image: url('../assets/entc_logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.25;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Remove the separator line for E & TC cards */
+.entc-event-card .event-coords {
+    border-top: none;
+}
+
+/* Civil Engineering Department Logo */
+.civil-event-card {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.civil-event-card::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 60%;
+    background-image: url('../assets/civil_logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Remove the separator line for Civil Engineering cards */
+.civil-event-card .event-coords {
+    border-top: none;
+}
+
+/* General Science & Humanities Department Logo */
+.science-humanities-event-card {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.science-humanities-event-card::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    background-image: url('../assets/science_humanities_logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Remove the separator line for General Science & Humanities cards */
+.science-humanities-event-card .event-coords {
+    border-top: none;
+}

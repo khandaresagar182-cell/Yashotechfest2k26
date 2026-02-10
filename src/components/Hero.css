@@ -1,0 +1,280 @@
+.hero {
+    background: linear-gradient(180deg, #e0e7ff 0%, #fef3c7 50%, #fff 100%);
+    padding: 4rem 2rem 1rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 700px;
+    /* Ensure pseudo-element doesn't overflow */
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/poster.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.2;
+    z-index: 0;
+}
+
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    /* Ensure content is above background */
+}
+
+.hero-badge {
+    display: inline-block;
+    background: white;
+    color: #334155;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    letter-spacing: 1px;
+}
+
+.hero-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.hero .title-yashotech {
+    font-size: 5.5rem;
+    font-weight: 900;
+    color: #1e3a8a !important;
+    letter-spacing: 4px;
+    line-height: 1;
+    text-transform: uppercase;
+    text-shadow: 4px 4px 0px rgba(255, 255, 255, 0.5), 6px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.title-fest {
+    font-size: 4rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 3px;
+    line-height: 1;
+    filter: drop-shadow(2px 4px 8px rgba(234, 88, 12, 0.3));
+}
+
+
+
+.hero-tagline {
+    font-size: 1.25rem;
+    color: #475569;
+    font-style: italic;
+    margin-bottom: 2rem;
+}
+
+.event-starts {
+    font-size: 0.85rem;
+    color: #64748b;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.countdown-item {
+    background: white;
+    padding: 1.5rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    min-width: 100px;
+}
+
+.countdown-value {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #1e3a8a;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.countdown-label {
+    font-size: 0.85rem;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.btn-explore {
+    background: linear-gradient(135deg, #f59e0b, #f97316);
+    color: white;
+    border: none;
+    padding: 0.85rem 1.75rem;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.btn-explore:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(245, 158, 11, 0.4);
+}
+
+.btn-prize {
+    background: white;
+    color: #1e3a8a;
+    border: 2px solid #e2e8f0;
+    padding: 0.85rem 1.75rem;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.btn-prize:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    border-color: #1e3a8a;
+}
+
+.btn-show {
+    background: linear-gradient(135deg, #f59e0b, #f97316);
+    color: white;
+    border: none;
+    padding: 0.85rem 1.75rem;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.btn-show:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(245, 158, 11, 0.4);
+}
+
+.scroll-indicator {
+    font-size: 2rem;
+    color: #94a3b8;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 3rem 1rem;
+    }
+
+    .hero .title-yashotech {
+        font-size: 3.5rem;
+        /* Adjusted for better fit */
+        text-shadow:
+            1px 1px 3px rgba(0, 0, 0, 0.15),
+            0 0 15px rgba(30, 58, 138, 0.25);
+    }
+
+    .title-fest {
+        font-size: 3rem;
+    }
+
+    .hero-tagline {
+        font-size: 1rem;
+    }
+
+    .countdown {
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .countdown-item {
+        padding: 0.5rem 0.25rem;
+        /* Much smaller padding */
+        min-width: 50px;
+        flex: 1 1 50px;
+        /* Allow shrinking/growing */
+    }
+
+    .countdown-value {
+        font-size: 1.5rem;
+    }
+
+    .countdown-label {
+        font-size: 0.75rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* Ultra Small Screens (iPhone SE, Foldables etc) */
+@media (max-width: 380px) {
+    .hero .title-yashotech {
+        font-size: 2.2rem;
+    }
+
+    .title-fest {
+        font-size: 2rem;
+    }
+
+    .hero-badge {
+        font-size: 0.65rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .countdown-item {
+        min-width: 45px;
+        padding: 0.5rem 0.2rem;
+    }
+
+    .countdown-value {
+        font-size: 1.25rem;
+    }
+}

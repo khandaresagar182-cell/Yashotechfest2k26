@@ -1,0 +1,194 @@
+.events-header {
+    background: #1e3a8a;
+    /* Deep Blue Background */
+    color: white;
+    padding: 6rem 1rem 8rem 4rem;
+    /* Adjusted padding for layout */
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.header-badge {
+    background: transparent;
+    color: #f59e0b;
+    border: 1px solid #f59e0b;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    letter-spacing: 1px;
+}
+
+.header-title {
+    font-size: 4rem;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.title-yashotech {
+    color: white;
+    font-size: 5.5rem;
+    font-weight: 900;
+    letter-spacing: 4px;
+    line-height: 1;
+    text-transform: uppercase;
+    text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.title-fest {
+    color: #f59e0b;
+    /* Orange accent */
+    font-size: 4rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-shadow: 2px 4px 8px rgba(234, 88, 12, 0.3);
+}
+
+.header-tagline {
+    font-size: 1rem;
+    color: #cbd5e1;
+    max-width: 500px;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.header-explore-btn {
+    background: white;
+    color: #1e3a8a;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-weight: 700;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.header-prize {
+    color: #fbbf24;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    padding: 0.7rem 1.2rem;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Save the Date Card */
+.save-the-date-card {
+    position: absolute;
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    color: #1e3a8a;
+    padding: 2.5rem 2rem;
+    border-radius: 20px 20px 20px 20px;
+    /* Rounded card */
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    min-width: 200px;
+    transform: rotate(-2deg) translateY(-50%);
+    /* Slight tilt */
+}
+
+.save-text {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #64748b;
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.date-number {
+    font-size: 4.5rem;
+    font-weight: 900;
+    line-height: 1;
+    color: #1e3a8a;
+}
+
+.date-month {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1e3a8a;
+    margin-bottom: 0.5rem;
+}
+
+.date-year {
+    display: inline-block;
+    background: #f1f5f9;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #64748b;
+}
+
+@media (max-width: 900px) {
+    .events-header {
+        padding: 4rem 2rem;
+        align-items: center;
+        text-align: center;
+    }
+
+    .save-the-date-card {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: rotate(0);
+        margin-top: 3rem;
+    }
+
+    .header-title {
+        align-items: center;
+        font-size: 3rem;
+    }
+
+    .header-tagline {
+        text-align: center;
+    }
+
+    .header-buttons {
+        justify-content: center;
+    }
+
+    .title-yashotech {
+        font-size: 3.5rem;
+    }
+
+    .title-fest {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .title-yashotech {
+        font-size: 2.2rem;
+        letter-spacing: 2px;
+    }
+
+    .title-fest {
+        font-size: 2rem;
+        letter-spacing: 1px;
+    }
+
+    .header-badge {
+        font-size: 0.6rem;
+    }
+}

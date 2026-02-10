@@ -1,0 +1,369 @@
+.registration-container {
+    display: flex;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    background-color: #f1f5f9;
+}
+
+/* Left Sidebar */
+.reg-sidebar {
+    width: 40%;
+    background-color: #0f172a;
+    /* Dark Blue */
+    color: white;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+
+.reg-sidebar::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(circle, rgba(30, 58, 138, 0.3) 0%, rgba(15, 23, 42, 0) 70%);
+    pointer-events: none;
+}
+
+.brand-section h3 {
+    color: #f59e0b;
+    /* Orange/Gold */
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.brand-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+}
+
+.highlight-text {
+    color: #f59e0b;
+}
+
+.brand-tagline {
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.2rem;
+    opacity: 0.9;
+    padding-left: 1rem;
+    border-left: 3px solid #f59e0b;
+}
+
+.info-cards {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.info-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.info-icon {
+    font-size: 1.5rem;
+}
+
+.info-content h4 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: white;
+    font-weight: 600;
+}
+
+.info-content p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #94a3b8;
+}
+
+.trophy-container {
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+    font-size: 8rem;
+    padding-top: 2rem;
+}
+
+.footer-copy {
+    font-size: 0.75rem;
+    color: #64748b;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+/* Right Content */
+.reg-content {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reg-card {
+    background: white;
+    width: 100%;
+    max-width: 600px;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+}
+
+.form-header h2 {
+    font-size: 1.8rem;
+    color: #0f172a;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.form-desc {
+    color: #64748b;
+    font-size: 0.95rem;
+}
+
+.entry-fee-badge {
+    text-align: right;
+    background: #d1fae5;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    color: #065f46;
+}
+
+.fee-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.fee-amount {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.reg-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.4rem;
+    color: #334155;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 1rem;
+    color: #94a3b8;
+}
+
+.form-input,
+.form-select {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.8rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+    outline: none;
+    color: #1e293b;
+    background: white;
+}
+
+.form-input:focus,
+.form-select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+/* Payment Section */
+.payment-section {
+    border: 2px dashed #e2e8f0;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    background: #f8fafc;
+}
+
+.payment-grid {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.qr-placeholder {
+    width: 100px;
+    height: 100px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    text-align: center;
+    padding: 0.5rem;
+}
+
+.qr-code-mock {
+    width: 60px;
+    height: 60px;
+    background: #0f172a;
+    /* Mock QR */
+    margin-bottom: 5px;
+    opacity: 0.8;
+}
+
+.scan-text {
+    font-size: 0.7rem;
+    color: #64748b;
+}
+
+.upload-area {
+    flex: 1;
+    text-align: center;
+    padding: 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.upload-area:hover {
+    background: #f1f5f9;
+}
+
+.upload-icon {
+    font-size: 1.5rem;
+    color: #94a3b8;
+    margin-bottom: 0.5rem;
+}
+
+.upload-label {
+    font-weight: 600;
+    color: #334155;
+    font-size: 0.9rem;
+}
+
+.upload-helper {
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+/* Checkbox */
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.checkbox-group label {
+    color: #475569;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.btn-confirm {
+    background-color: #0f172a;
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background-color 0.2s;
+}
+
+.btn-confirm:hover {
+    background-color: #1e293b;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .registration-container {
+        flex-direction: column;
+    }
+
+    .reg-sidebar {
+        width: 100%;
+        padding: 2rem;
+        min-height: auto;
+    }
+
+    .brand-title {
+        font-size: 2.5rem;
+    }
+
+    .info-cards {
+        display: none;
+        /* Hide illustrative cards on mobile to save space */
+    }
+
+    .trophy-container {
+        display: none;
+    }
+
+    .reg-content {
+        padding: 1rem;
+    }
+
+    .reg-card {
+        padding: 1.5rem;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+}

@@ -1,0 +1,201 @@
+.footer {
+    background: #1e293b;
+    color: white;
+    padding: 3rem 2rem 1.5rem;
+}
+
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-section h4 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #94a3b8;
+    margin-bottom: 0.75rem;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+.footer-section p {
+    font-size: 0.85rem;
+    color: #e2e8f0;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.footer-section small {
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+.footer-bottom {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-logo h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.25rem;
+}
+
+.footer-logo p {
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+.copyright {
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.footer-section.full-width {
+    grid-column: 1 / -1;
+    margin-top: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.association-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.assoc-item {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.2s, background 0.2s;
+}
+
+.assoc-item:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.assoc-name {
+    display: block;
+    font-weight: 600;
+    color: #fca5a5;
+    /* Light Red/Pink */
+    margin-bottom: 0.25rem;
+    font-size: 0.95rem;
+}
+
+.assoc-role {
+    display: block;
+    font-size: 0.85rem;
+    color: #94a3b8;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* Patrons Section - Special Styling */
+.patrons-section .patron-card {
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+    border-left: 3px solid #f59e0b;
+    /* Amber/Gold Accent */
+}
+
+.patrons-section .patron-name {
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fbbf24;
+    /* Lighter Gold */
+    letter-spacing: 0.5px;
+    margin-bottom: 0.2rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.patrons-section small {
+    display: block;
+    font-size: 0.8rem;
+    color: #cbd5e1;
+    font-style: italic;
+}
+
+/* Convenor Section - Professional Styling */
+.convenor-section .convenor-card {
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+    border-left: 3px solid #38bdf8;
+    /* Sky Blue - Professional/Tech */
+}
+
+.convenor-section .convenor-name {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #bae6fd;
+    /* Light Blue */
+    letter-spacing: 0.5px;
+    margin-bottom: 0.2rem;
+}
+
+.convenor-section small {
+    color: #94a3b8;
+}
+
+/* Mobile Responsiveness Improvements */
+@media (max-width: 768px) {
+    .footer {
+        padding: 2rem 1.5rem 1rem;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        /* Force single column on mobile */
+        gap: 2rem;
+    }
+
+    .footer-section h4 {
+        margin-top: 0.5rem;
+        /* Add some spacing between stacked sections */
+    }
+
+    /* Adjust special sections for mobile */
+    .patrons-section .patron-card,
+    .convenor-section .convenor-card {
+        padding-left: 0.75rem;
+        border-left-width: 2px;
+        /* Slightly thinner border on mobile */
+    }
+
+    .patrons-section .patron-name {
+        font-size: 0.95rem;
+    }
+
+    .convenor-section .convenor-name {
+        font-size: 0.9rem;
+    }
+}
