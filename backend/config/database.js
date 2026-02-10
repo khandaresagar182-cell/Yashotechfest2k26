@@ -19,8 +19,11 @@ const sequelize = new Sequelize(
         port: process.env.DB_PORT || 3306,
         dialect: 'mysql',
         dialectOptions: {
-            connectTimeout: 60000 // Increase connection timeout to 60 seconds
+            connectTimeout: 60000, // Increase connection timeout to 60 seconds
+            dateStrings: true,
+            typeCast: true
         },
+        timezone: '+05:30', // Set Timezone to Indian Standard Time (IST)
         logging: false, // Set to console.log to see SQL queries
         pool: {
             max: 5,
