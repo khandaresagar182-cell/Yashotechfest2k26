@@ -31,6 +31,20 @@ const Hero = () => {
         return () => clearInterval(timer);
     }, []);
 
+    const [text, setText] = useState('');
+    const fullText = "> \"Think it, Crack it, Lead it.\"";
+
+    useEffect(() => {
+        let index = 0;
+        const typeWriter = setInterval(() => {
+            setText((prev) => fullText.substring(0, index + 1));
+            index++;
+            if (index > fullText.length) clearInterval(typeWriter);
+        }, 100);
+
+        return () => clearInterval(typeWriter);
+    }, []);
+
     const handleExplore = () => {
         const eventsSection = document.getElementById('department-events');
         if (eventsSection) {
@@ -41,14 +55,19 @@ const Hero = () => {
     return (
         <section className="hero">
             <div className="hero-container">
-                <div className="hero-badge">★ STATE-LEVEL TECHNICAL COMPETITION</div>
+                <div className="status-badge">
+                    <span className="status-dot"></span>
+                    Registrations: Only Few Left
+                </div>
 
                 <h1 className="hero-title">
                     <span className="title-yashotech">YASHOTECH</span>
                     <span className="title-fest">FEST 2K26</span>
                 </h1>
 
-                <p className="hero-tagline">"Think it, Crack it, Lead it."</p>
+                <p className="hero-tagline">
+                    {text}<span className="cursor">|</span>
+                </p>
 
                 <div className="event-starts">EVENT STARTS IN</div>
 
