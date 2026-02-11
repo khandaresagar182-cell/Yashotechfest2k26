@@ -55,10 +55,7 @@ const Hero = () => {
     return (
         <section className="hero">
             <div className="hero-container">
-                <div className="status-badge">
-                    <span className="status-dot"></span>
-                    Registrations: Only Few Left
-                </div>
+                <div className="hero-badge">★ STATE-LEVEL TECHNICAL COMPETITION</div>
 
                 <h1 className="hero-title">
                     <span className="title-yashotech">YASHOTECH</span>
