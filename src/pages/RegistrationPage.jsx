@@ -36,7 +36,8 @@ const RegistrationPage = () => {
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-    const [emailExists, setEmailExists] = useState(false);
+    // const [emailExists, setEmailExists] = useState(false); // Removed duplicate check
+
 
     // Flat rate team events (always ₹200) - NOW EMPTY as per new requirement
     const isFlatRateEvent = false;
@@ -104,7 +105,8 @@ const RegistrationPage = () => {
         setError(''); // Clear error on input change
     };
 
-    // Check email availability
+    // Check email availability - REMOVED
+    /*
     const handleEmailBlur = async () => {
         if (formData.email) {
             try {
@@ -117,6 +119,8 @@ const RegistrationPage = () => {
             }
         }
     };
+    */
+
 
     // Handle Razorpay payment
     const handlePayment = async (orderData) => {
@@ -243,16 +247,16 @@ const RegistrationPage = () => {
         }
 
         // 2. Phone Validation (Numbers only, exactly 10 digits)
-        const phoneRegex = /^[0-9]{10}$/;
         if (!phoneRegex.test(formData.phone)) {
             setError('Mobile number must be exactly 10 digits (numbers only).');
             return;
         }
 
-        if (emailExists) {
-            setError('This email is already registered. Please use a different email.');
-            return;
-        }
+        // if (emailExists) {
+        //     setError('This email is already registered. Please use a different email.');
+        //     return;
+        // }
+
 
         setLoading(true);
         setError('');
@@ -453,15 +457,17 @@ const RegistrationPage = () => {
                                                 placeholder="you@example.com"
                                                 value={formData.email}
                                                 onChange={handleInputChange}
-                                                onBlur={handleEmailBlur}
+                                                // onBlur={handleEmailBlur} // Removed
                                                 required
                                             />
+
                                         </div>
-                                        {emailExists && (
+                                        {/* {emailExists && (
                                             <p style={{ color: 'red', fontSize: '0.9em', marginTop: '0.5rem' }}>
                                                 This email is already registered
                                             </p>
-                                        )}
+                                        )} */}
+
                                     </div>
                                     <div className="form-group">
                                         <label>Mobile Number <span style={{ color: 'red' }}>*</span></label>
@@ -592,14 +598,14 @@ const RegistrationPage = () => {
                                 )}
 
                                 <div className="checkbox-group">
-                                    <input type="checkbox" id="agree" required />
                                     <label htmlFor="agree">I agree to the <span style={{ color: '#2563eb', fontWeight: 'bold' }}>rules & regulations</span></label>
                                 </div>
 
-                                <button type="submit" className="btn-confirm" disabled={loading || emailExists}>
+                                <button type="submit" className="btn-confirm" disabled={loading}>
                                     {loading ? '⏳ Processing Payment...' : 'CONFIRM REGISTRATION'}
                                 </button>
                             </>
+
                         )}
                     </form>
                 </motion.div>

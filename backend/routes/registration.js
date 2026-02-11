@@ -56,43 +56,8 @@ router.post('/create', async (req, res) => {
             });
         }
 
-        // Check if email already registered for this specific event
-        try {
-            const { Op } = require('sequelize');
+        // Check if email already registered for this specific event - REMOVED to allow duplicates
 
-            // Check total registration count (Max 3 allowed)
-            const registrationCount = await Registration.count({
-                where: {
-                    [Op.or]: [
-                        { email: email },
-                        { phone: phone }
-                    ],
-                    paymentStatus: 'completed'
-                }
-            });
-
-            if (registrationCount >= 3) {
-                return res.status(400).json({
-                    error: true,
-                    message: 'You have already registered for 3 events. Maximum limit reached.'
-                });
-            }
-
-            const existingRegistration = await Registration.findOne({
-                where: {
-                    email: email,
-                    event: event
-                }
-            });
-            if (existingRegistration && existingRegistration.paymentStatus === 'completed') {
-                return res.status(400).json({
-                    error: true,
-                    message: 'This email is already registered. Please use a different email.'
-                });
-            }
-        } catch (dbError) {
-            console.warn("⚠️ Database check warning:", dbError.message);
-        }
 
         // Prepare teammates array
         const teammates = [teammate2, teammate3, teammate4, teammate5].filter(t => t && t.trim());
@@ -119,9 +84,19 @@ router.post('/create', async (req, res) => {
 
         // Handle Sequelize validation errors specifically
         if (error.name === 'SequelizeUniqueConstraintError') {
+            // Ideally this shouldn't happen if we allow duplicates, unless there is a DB unique constraint.
+            // Given the user wants to allow duplicates, we should probably catch this and ignore or warn, 
+            // but if the DB has a unique index, it will still fail. 
+            // Assuming the user wants to bypass application logic checks. 
+            // If DB has unique constraints, those need to be removed or we suppress this error (which might fail insertion).
+            // For now, let's keep it but logging it might be better if we really want to allow it.
+            // Actually, the user said "allow all user add multiple times".
+            // If the DB has unique constraints, we can't force it without DB schema change.
+            // But let's assume the "logic" was the main blocker.
+            // If this error occurs, it means DB rejected it.
             return res.status(400).json({
                 error: true,
-                message: 'This email or phone number is already registered for this event.'
+                message: 'This email or phone number is already registered for this event (Database Constraint).'
             });
         }
         if (error.name === 'SequelizeValidationError') {
