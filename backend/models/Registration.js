@@ -3,7 +3,7 @@ const sequelize = require('../config/database');
 
 const calculateAmount = (registration) => {
     // Flat rate events (always ₹200)
-    const flatRateEvents = [];
+    const flatRateEvents = ['BGMI Competition', 'Free Fire (E Sport Event)'];
 
     // Dynamic pricing team events (₹50 per person)
     const dynamicTeamEvents = [
@@ -21,8 +21,7 @@ const calculateAmount = (registration) => {
         'Technical Quiz',
         'Quiz Competition',
         'Technical Treasure Hunt',
-        'BGMI Competition',
-        'Free Fire (E Sport Event)'
+        'Robo Race'
     ];
 
     if (flatRateEvents.includes(registration.event)) {
