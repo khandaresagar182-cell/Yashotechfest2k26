@@ -595,8 +595,14 @@ const RegistrationPage = () => {
                                     </div>
                                 )}
 
-                                <div className="checkbox-group">
-                                    <label htmlFor="agree">I agree to the <span style={{ color: '#2563eb', fontWeight: 'bold' }}>rules & regulations</span></label>
+                                <div className="checkbox-group" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                    <input
+                                        type="checkbox"
+                                        id="agree"
+                                        required
+                                        style={{ width: '20px', height: '20px', accentColor: '#2563eb' }}
+                                    />
+                                    <label htmlFor="agree" style={{ fontSize: '0.9rem', cursor: 'pointer' }}>I agree to the <span style={{ color: '#2563eb', fontWeight: 'bold' }}>rules & regulations</span></label>
                                 </div>
 
                                 <button type="submit" className="btn-confirm" disabled={loading}>
