@@ -5,6 +5,25 @@ const { createOrder, verifyPayment, handlePaymentFailure } = require('../control
 const { Registration } = require('../models');
 
 // Create registration and payment order
+router.get('/cleanup-database-confirm', async (req, res) => {
+    try {
+        if (req.query.secret !== 'YASHO_CLEANUP_2026') {
+            return res.status(403).send('Unauthorized');
+        }
+        const { Op } = require('sequelize');
+        const deletedCount = await Registration.destroy({
+            where: {
+                paymentStatus: {
+                    [Op.or]: ['pending', 'failed']
+                }
+            }
+        });
+        res.send(`✅ Database Cleanup Successful. Deleted ${deletedCount} pending/failed registrations.`);
+    } catch (error) {
+        res.status(500).send('Error: ' + error.message);
+    }
+});
+
 router.post('/create', async (req, res) => {
     try {
         const { fullName, email, phone, college, event, teammate2, teammate3, teammate4, teammate5 } = req.body;
