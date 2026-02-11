@@ -245,6 +245,7 @@ const RegistrationPage = () => {
         }
 
         // 2. Phone Validation (Numbers only, exactly 10 digits)
+        const phoneRegex = /^[0-9]{10}$/;
         if (!phoneRegex.test(formData.phone)) {
             setError('Mobile number must be exactly 10 digits (numbers only).');
             return;
