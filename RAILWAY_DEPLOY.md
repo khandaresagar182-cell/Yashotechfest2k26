@@ -67,3 +67,16 @@
 Your website is live!
 - Frontend: `https://yashotech-fest.vercel.app`
 - Backend: `https://backend-production.up.railway.app`
+
+---
+
+## ⚠️ CRITICAL: Will it go offline?
+
+### Railway (Backend)
+- **YES**, your backend WILL STOP if you run out of trial credits ($5).
+- **Recommendation**: For a live event, **add a credit card** to upgrade to the "Hobby" plan. It costs ~$5/month but ensures your site stays online 24/7.
+- Check your usage at [railway.app/settings](https://railway.app/settings).
+
+### Vercel (Frontend)
+- **NO**, Vercel's free tier is very generous.
+- Unless you have millions of visitors, it will stay online forever.
