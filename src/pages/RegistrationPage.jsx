@@ -522,7 +522,7 @@ const RegistrationPage = () => {
 
                                         <div className="form-row">
                                             <div className="form-group">
-                                                <label>Teammate 2 Name <span style={{ color: (isFourMemberEvent || isOptionalTwoMembers) ? '#64748b' : 'red', fontSize: (isFourMemberEvent || isOptionalTwoMembers) ? '0.85em' : '1em' }}>{(isFourMemberEvent || isOptionalTwoMembers) ? '(Optional)' : '*'}</span></label>
+                                                <label>Teammate 2 Name <span style={{ color: ((isFourMemberEvent && !isBgmi && !isFreeFire) || isOptionalTwoMembers) ? '#64748b' : 'red', fontSize: ((isFourMemberEvent && !isBgmi && !isFreeFire) || isOptionalTwoMembers) ? '0.85em' : '1em' }}>{((isFourMemberEvent && !isBgmi && !isFreeFire) || isOptionalTwoMembers) ? '(Optional)' : '*'}</span></label>
                                                 <input
                                                     type="text"
                                                     name="teammate2"
@@ -530,7 +530,7 @@ const RegistrationPage = () => {
                                                     placeholder="Player 2 Name"
                                                     value={formData.teammate2}
                                                     onChange={handleInputChange}
-                                                    required={isTeamEvent && !isOptionalTwoMembers && !isFourMemberEvent}
+                                                    required={isTeamEvent && !isOptionalTwoMembers && (!isFourMemberEvent || isBgmi || isFreeFire)}
                                                 />
                                             </div>
 
