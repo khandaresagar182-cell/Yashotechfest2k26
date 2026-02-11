@@ -73,7 +73,7 @@ const Hero = () => {
 
                 <div className="hero-buttons">
                     <button className="btn-explore desktop-only" onClick={handleExplore}>Explore Now</button>
-                    <button className="btn-explore mobile-only" onClick={handleExplore}>Register Now</button>
+                    <button className="btn-explore mobile-only" onClick={() => navigate('/events')}>Register Now</button>
                     <button className="btn-prize">⭕ 24 Feb 2026</button>
                 </div>
 
