@@ -1,9 +1,30 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import './DepartmentEvents.css';
 
 const DepartmentEvents = () => {
     const navigate = useNavigate();
+
+    // Animation Variants
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2
+            }
+        }
+    };
+
+    const cardVariants = {
+        hidden: { opacity: 0, y: 50 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.5, ease: "easeOut" }
+        }
+    };
 
     const handleRegister = (eventName) => {
         navigate('/register', { state: { eventName } });
@@ -321,9 +342,19 @@ const DepartmentEvents = () => {
                         </div>
                         <div className="dept-underline" style={{ backgroundColor: dept.color }}></div>
 
-                        <div className="events-grid">
+                        <motion.div
+                            className="events-grid"
+                            variants={containerVariants}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, amount: 0.1 }}
+                        >
                             {(dept.events || []).map(event => (
-                                <div key={event.id} className={`event-card ${dept.id === 1 ? 'aiml-event-card' : ''} ${dept.id === 2 ? 'comp-eng-event-card' : ''} ${dept.id === 3 ? 'civil-event-card' : ''} ${dept.id === 4 ? 'mechanical-event-card' : ''} ${dept.id === 5 ? 'entc-event-card' : ''} ${dept.id === 6 ? 'science-humanities-event-card' : ''} ${dept.id === 7 ? 'it-event-card' : ''} ${dept.id === 8 ? 'electrical-event-card' : ''}`}>
+                                <motion.div
+                                    key={event.id}
+                                    className={`event-card ${dept.id === 1 ? 'aiml-event-card' : ''} ${dept.id === 2 ? 'comp-eng-event-card' : ''} ${dept.id === 3 ? 'civil-event-card' : ''} ${dept.id === 4 ? 'mechanical-event-card' : ''} ${dept.id === 5 ? 'entc-event-card' : ''} ${dept.id === 6 ? 'science-humanities-event-card' : ''} ${dept.id === 7 ? 'it-event-card' : ''} ${dept.id === 8 ? 'electrical-event-card' : ''}`}
+                                    variants={cardVariants}
+                                >
                                     <div className="event-card-top">
                                         <div className="event-icon-box" style={{ color: '#1e3a8a' }}>
                                             {event.icon || '< >'}
@@ -370,9 +401,9 @@ const DepartmentEvents = () => {
                                             Register
                                         </button>
                                     </div>
-                                </div>
+                                </motion.div>
                             ))}
-                        </div>
+                        </motion.div>
                     </div>
                 ))}
             </div>
