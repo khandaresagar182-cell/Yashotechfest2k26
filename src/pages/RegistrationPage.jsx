@@ -39,8 +39,8 @@ const RegistrationPage = () => {
     // const [emailExists, setEmailExists] = useState(false); // Removed duplicate check
 
 
-    // Flat rate team events (always ₹200) - NOW EMPTY as per new requirement
-    const isFlatRateEvent = false;
+    // Flat rate team events (always ₹200)
+    const isFlatRateEvent = formData.event === "BGMI Competition" || formData.event === "Free Fire (E Sport Event)";
 
     const isTechnicalAuction = formData.event === "Technical Auction";
     const isPaperPresentation = formData.event === "Technical Paper Presentation";
@@ -79,9 +79,7 @@ const RegistrationPage = () => {
         "Technical Quiz",
         "Quiz Competition",
         "Technical Treasure Hunt",
-        "Robo Race",
-        "BGMI Competition",
-        "Free Fire (E Sport Event)"
+        "Robo Race"
     ].includes(formData.event);
 
     // Any team event (for showing teammate fields)
