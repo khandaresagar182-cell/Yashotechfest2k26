@@ -3,9 +3,59 @@ const router = express.Router();
 const { createOrder, verifyPayment, handlePaymentFailure } = require('../controllers/paymentController');
 
 const { Registration, Payment } = require('../models');
+const sequelize = require('../config/database'); // Import sequelize for raw queries
+
+// ROUTE TO FIX DATABASE CONSTRAINTS (One-time use)
+router.get('/fix-db-constraints', async (req, res) => {
+    try {
+        const queryInterface = sequelize.getQueryInterface();
+        let logs = [];
+
+        // Attempt 1: Drop 'email' index
+        try {
+            await queryInterface.removeIndex('registrations', 'email');
+            logs.push("✅ Removed index 'email'");
+        } catch (e) {
+            logs.push(`⚠️ Could not remove index 'email': ${e.message}`);
+        }
+
+        // Attempt 2: Drop 'email' unique constraint (sometimes named differently)
+        try {
+            await queryInterface.removeConstraint('registrations', 'email');
+            logs.push("✅ Removed constraint 'email'");
+        } catch (e) {
+            logs.push(`⚠️ Could not remove constraint 'email': ${e.message}`);
+        }
+
+        // Attempt 3: Drop 'registrations_email_unique' (Sequelize default name)
+        try {
+            await queryInterface.removeConstraint('registrations', 'registrations_email_unique');
+            logs.push("✅ Removed constraint 'registrations_email_unique'");
+        } catch (e) {
+            logs.push(`⚠️ Could not remove constraint 'registrations_email_unique': ${e.message}`);
+        }
+
+        // Attempt 4: Drop 'phone' index
+        try {
+            await queryInterface.removeIndex('registrations', 'phone');
+            logs.push("✅ Removed index 'phone'");
+        } catch (e) {
+            logs.push(`⚠️ Could not remove index 'phone': ${e.message}`);
+        }
+
+        res.send(`
+            <h1>Database Fix Results</h1>
+            <pre>${logs.join('\n')}</pre>
+            <p>If you see at least one "Removed" message (or if it says they don't exist), try registering a duplicate user now.</p>
+        `);
+    } catch (error) {
+        res.status(500).send('Critical Error: ' + error.message);
+    }
+});
 
 // Create registration and payment order
 router.get('/cleanup-database-confirm', async (req, res) => {
+
     try {
         if (req.query.secret !== 'YASHO_CLEANUP_2026') {
             return res.status(403).send('Unauthorized');
