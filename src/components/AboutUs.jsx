@@ -20,9 +20,9 @@ const AboutUs = () => {
                         <h3>Yashoda Technical Campus</h3>
                         <p>
                             Yashoda Technical Campus, Faculty of Polytechnic is a premier institution
-                            committed to providing quality technical education. We nurture young minds
-                            to become skilled professionals ready to excel in the ever-evolving
-                            technological landscape.
+                            committed to delivering quality technical education through its NBA-accredited
+                            programs. The institute offers industry-oriented diploma courses that prepare
+                            students to excel in the ever-evolving technological landscape.
                         </p>
                     </div>
 
