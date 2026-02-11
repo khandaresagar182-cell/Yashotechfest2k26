@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { createOrder, verifyPayment, handlePaymentFailure } = require('../controllers/paymentController');
 
-const { Registration } = require('../models');
+const { Registration, Payment } = require('../models');
 
 // Create registration and payment order
 router.get('/cleanup-database-confirm', async (req, res) => {
@@ -19,6 +19,26 @@ router.get('/cleanup-database-confirm', async (req, res) => {
             }
         });
         res.send(`✅ Database Cleanup Successful. Deleted ${deletedCount} pending/failed registrations.`);
+    } catch (error) {
+        res.status(500).send('Error: ' + error.message);
+    }
+});
+
+// Cleanup failed/pending payments from Payments table
+router.get('/cleanup-payments-confirm', async (req, res) => {
+    try {
+        if (req.query.secret !== 'YASHO_CLEANUP_2026') {
+            return res.status(403).send('Unauthorized');
+        }
+        const { Op } = require('sequelize');
+        const deletedCount = await Payment.destroy({
+            where: {
+                status: {
+                    [Op.or]: ['created', 'failed']
+                }
+            }
+        });
+        res.send(`✅ Payments Cleanup Successful. Deleted ${deletedCount} pending/failed payments.`);
     } catch (error) {
         res.status(500).send('Error: ' + error.message);
     }
