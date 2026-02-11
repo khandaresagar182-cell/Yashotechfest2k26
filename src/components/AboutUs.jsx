@@ -30,10 +30,9 @@ const AboutUs = () => {
                         <div className="card-icon">🏆</div>
                         <h3>YashoTech Fest 2K26</h3>
                         <p>
-                            YashoTech Fest 2K26 is our state-level technical competition that brings
-                            together brilliant minds from across the region. With exciting events across
-                            multiple departments, participants compete for amazing prizes while showcasing
-                            their technical prowess and innovation.
+                            Beyond academics, Yashoda Polytechnic focuses on the holistic development
+                            of students by fostering professional skills, values, and leadership qualities,
+                            shaping them into skilled professionals and responsible youth of India.
                         </p>
                     </div>
 
