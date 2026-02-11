@@ -608,26 +608,6 @@ const RegistrationPage = () => {
 
                         )}
                     </form>
-                    {/* Temporary Fix DB Button */}
-                    <div style={{ marginTop: '2rem', textAlign: 'center' }}>
-                        <button
-                            type="button"
-                            onClick={async () => {
-                                if (confirm('Run Database Fix? This will allow duplicate emails.')) {
-                                    try {
-                                        alert('Running fix...');
-                                        const res = await registrationAPI.fixDbConstraints();
-                                        alert('Result: ' + JSON.stringify(res.data));
-                                    } catch (e) {
-                                        alert('Error: ' + e.message);
-                                    }
-                                }
-                            }}
-                            style={{ background: '#333', color: '#fff', padding: '5px 10px', fontSize: '0.8rem', borderRadius: '4px', border: 'none', cursor: 'pointer' }}
-                        >
-                            🔧 Fix Duplicate Issue (Admin Only)
-                        </button>
-                    </div>
                 </motion.div>
             </div>
         </div>

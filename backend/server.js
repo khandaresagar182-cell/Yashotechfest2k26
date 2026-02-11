@@ -23,8 +23,34 @@ const sequelize = require('./config/database');
 
 console.log('Syncing database...');
 // Sync Database
-sequelize.sync({ alter: true }) // Sync schema changes (removed unique constraints on email/phone)
-    .then(() => console.log('✅ MySQL Database Connected & Synced'))
+sequelize.sync({ alter: true }) // Sync schema changes
+    .then(async () => {
+        console.log('✅ MySQL Database Connected & Synced');
+
+        // Automatically fix duplicate constraints on startup
+        try {
+            const queryInterface = sequelize.getQueryInterface();
+            console.log('🔧 Running database constraint cleanup...');
+
+            // Try to remove unique constraints that might block duplicates
+            const constraints = ['email', 'phone', 'registrations_email_unique', 'registrations_phone_unique'];
+
+            for (const constraint of constraints) {
+                try {
+                    await queryInterface.removeIndex('registrations', constraint);
+                    console.log(`✅ Removed index: ${constraint}`);
+                } catch (e) { /* ignore if not exists */ }
+
+                try {
+                    await queryInterface.removeConstraint('registrations', constraint);
+                    console.log(`✅ Removed constraint: ${constraint}`);
+                } catch (e) { /* ignore if not exists */ }
+            }
+            console.log('✨ Database constraints cleanup completed.');
+        } catch (dbFixError) {
+            console.warn('⚠️ Database auto-fix warning:', dbFixError.message);
+        }
+    })
     .catch((err) => console.error('❌ Database Connection Error:', err));
 
 // Routes

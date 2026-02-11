@@ -16,8 +16,7 @@ export const registrationAPI = {
     create: (data) => api.post('/registration/create', data),
     verifyPayment: (data) => api.post('/registration/verify-payment', data),
     paymentFailed: (data) => api.post('/registration/payment-failed', data),
-    checkEmail: (email) => api.get(`/registration/check-email/${email}`),
-    fixDbConstraints: () => api.get('/registration/fix-db-constraints')
+    checkEmail: (email) => api.get(`/registration/check-email/${email}`)
 };
 
 
