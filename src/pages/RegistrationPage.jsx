@@ -250,6 +250,20 @@ const RegistrationPage = () => {
             return;
         }
 
+        // 3. Agreement Validation
+        const agreeCheckbox = document.getElementById('agree');
+        if (!agreeCheckbox?.checked) {
+            setError('You must agree to the rules & regulations.');
+            return;
+        }
+
+        // 4. Teammate 2 Validation for BGMI/Free Fire
+        const isBgmiOrFF = formData.event === "BGMI Competition" || formData.event === "Free Fire (E Sport Event)";
+        if (isBgmiOrFF && (!formData.teammate2 || formData.teammate2.trim().length < 2)) {
+            setError('Teammate 2 Name is required for this event.');
+            return;
+        }
+
         // if (emailExists) {
         //     setError('This email is already registered. Please use a different email.');
         //     return;
@@ -528,7 +542,6 @@ const RegistrationPage = () => {
                                                     placeholder="Player 2 Name"
                                                     value={formData.teammate2}
                                                     onChange={handleInputChange}
-                                                    required={isTeamEvent && !isOptionalTwoMembers && (!isFourMemberEvent || isBgmi || isFreeFire)}
                                                 />
                                             </div>
 
@@ -599,7 +612,6 @@ const RegistrationPage = () => {
                                     <input
                                         type="checkbox"
                                         id="agree"
-                                        required
                                         style={{ width: '20px', height: '20px', accentColor: '#2563eb' }}
                                     />
                                     <label htmlFor="agree" style={{ fontSize: '0.9rem', cursor: 'pointer' }}>I agree to the <span style={{ color: '#2563eb', fontWeight: 'bold' }}>rules & regulations</span></label>
