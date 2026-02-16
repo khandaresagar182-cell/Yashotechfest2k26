@@ -239,4 +239,168 @@ router.get('/check-email/:email', async (req, res) => {
     }
 });
 
+// ============================================================
+// ADMIN: Manually fix a payment status (for failed callbacks)
+// Usage: GET /api/registration/admin/fix-payment?secret=YASHO_ADMIN_2026&email=xxx&event=xxx&paymentId=xxx
+// ============================================================
+router.get('/admin/fix-payment', async (req, res) => {
+    try {
+        const { secret, email, event, paymentId } = req.query;
+
+        // Secure with a secret key
+        if (secret !== 'YASHO_ADMIN_2026') {
+            return res.status(403).json({ error: true, message: 'Unauthorized' });
+        }
+
+        if (!email) {
+            return res.status(400).json({ error: true, message: 'Email is required' });
+        }
+
+        // Build where clause
+        const whereClause = { email };
+        if (event) whereClause.event = event;
+
+        // Find the registration
+        const registration = await Registration.findOne({
+            where: whereClause,
+            order: [['createdAt', 'DESC']] // Most recent first
+        });
+
+        if (!registration) {
+            return res.status(404).json({
+                error: true,
+                message: `No registration found for email: ${email}` + (event ? ` and event: ${event}` : '')
+            });
+        }
+
+        // Check if already completed
+        if (registration.paymentStatus === 'completed') {
+            return res.json({
+                success: true,
+                message: 'Payment is already marked as completed!',
+                registration: {
+                    id: registration.id,
+                    fullName: registration.fullName,
+                    email: registration.email,
+                    event: registration.event,
+                    amount: registration.amount,
+                    paymentStatus: registration.paymentStatus,
+                    razorpayPaymentId: registration.razorpayPaymentId
+                }
+            });
+        }
+
+        // Update to completed
+        registration.paymentStatus = 'completed';
+        registration.razorpayPaymentId = paymentId || 'manual_fix';
+        registration.paymentDate = new Date();
+        await registration.save();
+
+        // Also fix the Payment record if exists
+        if (registration.razorpayOrderId) {
+            const payment = await Payment.findOne({ where: { razorpayOrderId: registration.razorpayOrderId } });
+            if (payment) {
+                payment.status = 'captured';
+                payment.razorpayPaymentId = paymentId || 'manual_fix';
+                await payment.save();
+            }
+        }
+
+        res.json({
+            success: true,
+            message: `✅ Payment fixed successfully!`,
+            registration: {
+                id: registration.id,
+                fullName: registration.fullName,
+                email: registration.email,
+                event: registration.event,
+                amount: registration.amount,
+                paymentStatus: 'completed',
+                razorpayPaymentId: registration.razorpayPaymentId
+            }
+        });
+    } catch (error) {
+        console.error('Admin fix-payment error:', error);
+        res.status(500).json({ error: true, message: error.message });
+    }
+});
+
+// ============================================================
+// ADMIN: List all pending/failed payments for review
+// Usage: GET /api/registration/admin/pending-payments?secret=YASHO_ADMIN_2026
+// ============================================================
+router.get('/admin/pending-payments', async (req, res) => {
+    try {
+        if (req.query.secret !== 'YASHO_ADMIN_2026') {
+            return res.status(403).json({ error: true, message: 'Unauthorized' });
+        }
+
+        const { Op } = require('sequelize');
+        const pendingRegistrations = await Registration.findAll({
+            where: {
+                paymentStatus: { [Op.in]: ['pending', 'failed'] }
+            },
+            order: [['createdAt', 'DESC']],
+            attributes: ['id', 'fullName', 'email', 'phone', 'event', 'amount', 'paymentStatus', 'razorpayOrderId', 'razorpayPaymentId', 'createdAt']
+        });
+
+        res.json({
+            success: true,
+            count: pendingRegistrations.length,
+            registrations: pendingRegistrations
+        });
+    } catch (error) {
+        res.status(500).json({ error: true, message: error.message });
+    }
+});
+
+// ============================================================
+// RAZORPAY WEBHOOK: Automatic payment capture (prevents future misses)
+// Setup: In Razorpay Dashboard → Webhooks → Add URL: https://YOUR_BACKEND/api/registration/webhook/razorpay
+// ============================================================
+router.post('/webhook/razorpay', async (req, res) => {
+    try {
+        const event = req.body.event;
+        const payload = req.body.payload;
+
+        console.log(`📩 Razorpay Webhook received: ${event}`);
+
+        if (event === 'payment.captured' || event === 'order.paid') {
+            const paymentEntity = payload.payment?.entity;
+            if (!paymentEntity) {
+                return res.json({ status: 'ignored', reason: 'No payment entity' });
+            }
+
+            const orderId = paymentEntity.order_id;
+            const paymentId = paymentEntity.id;
+
+            // Find the registration by order ID
+            const registration = await Registration.findOne({ where: { razorpayOrderId: orderId } });
+
+            if (registration && registration.paymentStatus !== 'completed') {
+                registration.paymentStatus = 'completed';
+                registration.razorpayPaymentId = paymentId;
+                registration.paymentDate = new Date();
+                await registration.save();
+
+                // Update payment record
+                const payment = await Payment.findOne({ where: { razorpayOrderId: orderId } });
+                if (payment) {
+                    payment.razorpayPaymentId = paymentId;
+                    payment.status = 'captured';
+                    await payment.save();
+                }
+
+                console.log(`✅ Webhook: Fixed payment for registration ${registration.id} (${registration.email})`);
+            }
+        }
+
+        // Always respond 200 to Razorpay
+        res.json({ status: 'ok' });
+    } catch (error) {
+        console.error('Webhook error:', error);
+        res.json({ status: 'error', message: error.message });
+    }
+});
+
 module.exports = router;
