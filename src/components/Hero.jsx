@@ -31,6 +31,22 @@ const Hero = () => {
         return () => clearInterval(timer);
     }, []);
 
+    const handleExplore = () => {
+        const eventsSection = document.getElementById('department-events');
+        if (eventsSection) {
+            eventsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+    return (
+        <section className="hero">
+            <div className="hero-container">
+                <div className="hero-badge">STATE LEVEL TECHNICAL SYMPOSIUM</div>
+                <div className="hero-title">
+                    <span className="title-yashotech">YASHOTECH</span>
+                    <span className="title-fest">FEST 2K26</span>
+                </div>
+
                 <p className="hero-tagline">"Think it, Crack it, Lead it."</p>
 
                 <div className="event-starts">EVENT STARTS IN</div>
