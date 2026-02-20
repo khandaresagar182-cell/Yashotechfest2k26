@@ -71,7 +71,7 @@ const HomeEvents = () => {
             icon: '🔬',
             headerColor: '#d1fae5', // Green
             events: [
-                { name: 'Quiz Competition', icon: '📝', coord: 'Coord: Ms. Navghune J.V.' },
+                { name: 'Quiz Competition(GSH)', icon: '📝', coord: 'Coord: Ms. Navghune J.V.' },
                 { name: 'Fix It', icon: '🔧', coord: 'Coord: Ms. Dhumal P.P.' }
             ]
         },

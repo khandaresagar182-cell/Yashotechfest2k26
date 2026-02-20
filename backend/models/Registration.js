@@ -20,7 +20,7 @@ const calculateAmount = (registration) => {
         'Poster & Model Presentation',
         'Technical Quiz Competition',
         'Technical Quiz',
-        'Quiz Competition',
+        'Quiz Competition(GSH)',
         'Technical Treasure Hunt',
         'Robo Race'
     ];

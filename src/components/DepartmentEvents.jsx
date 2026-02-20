@@ -228,7 +228,7 @@ const DepartmentEvents = () => {
             events: [
                 {
                     id: 601,
-                    name: 'Quiz Competition',
+                    name: 'Quiz Competition(GSH)',
                     desc: 'Test your general knowledge and quick thinking skills.',
                     rulesLink: 'https://drive.google.com/file/d/1pNktfBwNmv_ngQC1UlL9e9XbnfUx5Pou/view?usp=sharing',
                     fees: '₹50',

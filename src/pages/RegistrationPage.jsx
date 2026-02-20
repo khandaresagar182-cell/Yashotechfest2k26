@@ -48,7 +48,7 @@ const RegistrationPage = () => {
     const isBuildYourBrain = formData.event === "Build Your Brain";
     const isFixIt = formData.event === "Fix It";
     const isWebDesign = formData.event === "Web Design Challenge";
-    const isQuiz = formData.event === "Technical Quiz Competition" || formData.event === "Technical Quiz" || formData.event === "Quiz Competition";
+    const isQuiz = formData.event === "Technical Quiz Competition" || formData.event === "Technical Quiz" || formData.event === "Quiz Competition(GSH)";
     const isPaperCup = formData.event === "Paper Cup Tower Madness";
     const isOldPosterPresentation = formData.event === "Poster Presentation";
     const isPosterPresentation = formData.event === "Poster & Model Presentation";
@@ -78,7 +78,7 @@ const RegistrationPage = () => {
         "Poster & Model Presentation",
         "Technical Quiz Competition",
         "Technical Quiz",
-        "Quiz Competition",
+        "Quiz Competition(GSH)",
         "Technical Treasure Hunt",
         "Robo Race"
     ].includes(formData.event);
@@ -295,7 +295,7 @@ const RegistrationPage = () => {
         "Technical Auction", "Mock Job Interviews", "Technical Treasure Hunt", "Paper Cup Tower Madness",
         "Technical Paper Presentation(CIVIL)", "Bridge Making Competition", "Build Your Brain",
         "Technical Quiz Competition", "Robo Race", "Web Design Challenge", "Poster Presentation", "Poster & Model Presentation",
-        "Technical Quiz", "Free Fire (E Sport Event)", "Technical Paper Presentation"
+        "Technical Quiz", "Free Fire (E Sport Event)", "Technical Paper Presentation", "Quiz Competition(GSH)", "Fix It"
     ];
 
     // Event Icons Mapping
@@ -312,7 +312,7 @@ const RegistrationPage = () => {
         "Build Your Brain": "💡",
         "Technical Quiz Competition": "📝",
         "Robo Race": "🤖",
-        "Quiz Competition": "📝",
+        "Quiz Competition(GSH)": "📝",
         "Fix It": "🔧",
         "Web Design Challenge": "🖥️",
         "Poster Presentation": "📊",
