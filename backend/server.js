@@ -47,6 +47,18 @@ sequelize.sync({ alter: true }) // Sync schema changes
                 } catch (e) { /* ignore if not exists */ }
             }
             console.log('✨ Database constraints cleanup completed.');
+
+            // One-time migration: Rename 'Quiz Competition' to 'Quiz Competition(GSH)'
+            try {
+                const [results] = await sequelize.query(
+                    `UPDATE registrations SET event = 'Quiz Competition(GSH)' WHERE event = 'Quiz Competition'`
+                );
+                if (results.affectedRows > 0) {
+                    console.log(`✅ Migrated ${results.affectedRows} records: 'Quiz Competition' → 'Quiz Competition(GSH)'`);
+                }
+            } catch (migrationErr) {
+                console.warn('⚠️ Event rename migration warning:', migrationErr.message);
+            }
         } catch (dbFixError) {
             console.warn('⚠️ Database auto-fix warning:', dbFixError.message);
         }
