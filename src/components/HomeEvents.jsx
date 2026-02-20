@@ -31,7 +31,7 @@ const HomeEvents = () => {
             icon: '🏗️',
             headerColor: '#fed7aa', // Orange/Pink
             events: [
-                { name: 'Technical Paper Presentation', icon: '📄', coord: 'Coord: Ms. Chavan S.S' },
+                { name: 'Technical Paper Presentation(CIVIL)', icon: '📄', coord: 'Coord: Ms. Chavan S.S' },
                 { name: 'Bridge Making Competition', icon: '🛠️', coord: 'Coord: Ms. Jadhav R.D.' },
                 { name: 'Build Your Brain', icon: '💡', coord: 'Coord: Mrs. Tate M.S.' }
             ]

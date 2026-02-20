@@ -43,7 +43,7 @@ const RegistrationPage = () => {
     const isFlatRateEvent = formData.event === "BGMI Competition" || formData.event === "Free Fire (E Sport Event)";
 
     const isTechnicalAuction = formData.event === "Technical Auction";
-    const isPaperPresentation = formData.event === "Technical Paper Presentation";
+    const isPaperPresentation = formData.event === "Technical Paper Presentation(CIVIL)" || formData.event === "Technical Paper Presentation";
     const isBridgeMaking = formData.event === "Bridge Making Competition";
     const isBuildYourBrain = formData.event === "Build Your Brain";
     const isFixIt = formData.event === "Fix It";
@@ -66,6 +66,7 @@ const RegistrationPage = () => {
     // Dynamic pricing team events (₹50 per person)
     const isDynamicTeamEvent = [
         "Technical Auction",
+        "Technical Paper Presentation(CIVIL)",
         "Technical Paper Presentation",
         "Bridge Making Competition",
         "Paper Cup Tower Madness",
@@ -292,9 +293,9 @@ const RegistrationPage = () => {
     const allEvents = [
         "Coding Competition", "BGMI Competition",
         "Technical Auction", "Mock Job Interviews", "Technical Treasure Hunt", "Paper Cup Tower Madness",
-        "Technical Paper Presentation", "Bridge Making Competition", "Build Your Brain",
+        "Technical Paper Presentation(CIVIL)", "Bridge Making Competition", "Build Your Brain",
         "Technical Quiz Competition", "Robo Race", "Web Design Challenge", "Poster Presentation", "Poster & Model Presentation",
-        "Technical Quiz", "Free Fire (E Sport Event)"
+        "Technical Quiz", "Free Fire (E Sport Event)", "Technical Paper Presentation"
     ];
 
     // Event Icons Mapping
@@ -305,6 +306,7 @@ const RegistrationPage = () => {
         "Mock Job Interviews": "💼",
         "Technical Treasure Hunt": "🗺️",
         "Paper Cup Tower Madness": "🥤",
+        "Technical Paper Presentation(CIVIL)": "📄",
         "Technical Paper Presentation": "📄",
         "Bridge Making Competition": "🛠️",
         "Build Your Brain": "💡",

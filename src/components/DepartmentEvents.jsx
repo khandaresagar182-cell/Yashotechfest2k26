@@ -132,7 +132,7 @@ const DepartmentEvents = () => {
             events: [
                 {
                     id: 301,
-                    name: 'Technical Paper Presentation',
+                    name: 'Technical Paper Presentation(CIVIL)',
                     desc: 'Present your innovative ideas and research in civil engineering.',
                     rulesLink: 'https://drive.google.com/file/d/1L0yBwl7KsoRyH2f4LUGorducuWfmLLRf/view?usp=sharing',
                     fees: '₹50',

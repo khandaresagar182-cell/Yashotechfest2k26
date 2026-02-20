@@ -8,6 +8,7 @@ const calculateAmount = (registration) => {
     // Dynamic pricing team events (₹50 per person)
     const dynamicTeamEvents = [
         'Technical Auction',
+        'Technical Paper Presentation(CIVIL)',
         'Technical Paper Presentation',
         'Bridge Making Competition',
         'Paper Cup Tower Madness',
