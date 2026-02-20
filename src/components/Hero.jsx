@@ -41,7 +41,7 @@ const Hero = () => {
     return (
         <section className="hero">
             <div className="hero-container">
-                <div className="hero-badge">STATE LEVEL TECHNICAL SYMPOSIUM</div>
+                <div className="hero-badge">STATE LEVEL TECHNICAL COMPETITION</div>
                 <div className="hero-title">
                     <span className="title-yashotech">YASHOTECH</span>
                     <span className="title-fest">FEST 2K26</span>
