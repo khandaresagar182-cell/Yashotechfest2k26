@@ -49,10 +49,10 @@ const Hero = () => {
 
                 <p className="hero-tagline">"Think it, Crack it, Lead it."</p>
 
-                <div className="countdown" style={{ display: 'flex', justifyContent: 'center', marginBottom: '2.5rem' }}>
-                    <div className="countdown-item pulse-animation" style={{ padding: '1.5rem 3rem', background: 'linear-gradient(135deg, #10b981, #059669)', color: 'white', border: 'none', width: '100%', maxWidth: '600px' }}>
-                        <div className="countdown-value" style={{ color: 'white', fontSize: '3rem', marginBottom: '0.5rem', textShadow: '2px 2px 4px rgba(0,0,0,0.2)' }}>FEST IS LIVE 🚀</div>
-                        <div className="countdown-label" style={{ color: '#d1fae5', fontSize: '1.2rem' }}>Welcome to Yashotech Fest 2K26</div>
+                <div className="live-banner-container">
+                    <div className="live-banner">
+                        <div className="live-text">FEST IS LIVE 🚀</div>
+                        <div className="live-subtext">Welcome to Yashotech Fest 2K26</div>
                     </div>
                 </div>
 
