@@ -403,4 +403,144 @@ router.post('/webhook/razorpay', async (req, res) => {
     }
 });
 
+// ============================================================
+// ADMIN: Auto-fix pending payments by verifying with Razorpay API
+// This checks each pending registration's order against Razorpay
+// and only updates records where payment was ACTUALLY captured.
+// Usage: GET /api/registration/admin/auto-fix-payments?secret=YASHO_ADMIN_2026
+// DRY RUN: GET /api/registration/admin/auto-fix-payments?secret=YASHO_ADMIN_2026&dryrun=true
+// ============================================================
+router.get('/admin/auto-fix-payments', async (req, res) => {
+    try {
+        if (req.query.secret !== 'YASHO_ADMIN_2026') {
+            return res.status(403).json({ error: true, message: 'Unauthorized' });
+        }
+
+        const isDryRun = req.query.dryrun === 'true';
+        const Razorpay = require('razorpay');
+        const { Op } = require('sequelize');
+
+        const razorpay = new Razorpay({
+            key_id: process.env.RAZORPAY_KEY_ID,
+            key_secret: process.env.RAZORPAY_KEY_SECRET
+        });
+
+        // Fetch all pending registrations
+        const pendingRegistrations = await Registration.findAll({
+            where: { paymentStatus: 'pending' },
+            order: [['createdAt', 'DESC']]
+        });
+
+        const results = {
+            mode: isDryRun ? 'DRY RUN' : 'LIVE FIX',
+            totalPending: pendingRegistrations.length,
+            fixed: [],
+            genuinelyPending: [],
+            mockOrders: [],
+            noOrderId: [],
+            errors: []
+        };
+
+        for (const reg of pendingRegistrations) {
+            const orderId = reg.razorpayOrderId;
+
+            // Skip registrations without an order ID
+            if (!orderId) {
+                results.noOrderId.push({
+                    id: reg.id, name: reg.fullName, email: reg.email, event: reg.event
+                });
+                continue;
+            }
+
+            // Skip mock orders
+            if (orderId.startsWith('order_mock')) {
+                results.mockOrders.push({
+                    id: reg.id, name: reg.fullName, email: reg.email, event: reg.event
+                });
+                continue;
+            }
+
+            try {
+                // Query Razorpay API for this order's payments
+                const payments = await razorpay.orders.fetchPayments(orderId);
+                const capturedPayment = payments.items.find(p => p.status === 'captured');
+
+                if (capturedPayment) {
+                    // ✅ Payment was actually completed - fix it!
+                    if (!isDryRun) {
+                        reg.paymentStatus = 'completed';
+                        reg.razorpayPaymentId = capturedPayment.id;
+                        reg.paymentDate = new Date(capturedPayment.created_at * 1000);
+                        await reg.save();
+
+                        // Also fix Payment record
+                        const paymentRecord = await Payment.findOne({ where: { razorpayOrderId: orderId } });
+                        if (paymentRecord) {
+                            paymentRecord.status = 'captured';
+                            paymentRecord.razorpayPaymentId = capturedPayment.id;
+                            await paymentRecord.save();
+                        }
+                    }
+
+                    results.fixed.push({
+                        id: reg.id,
+                        name: reg.fullName,
+                        email: reg.email,
+                        event: reg.event,
+                        amount: reg.amount,
+                        razorpayPaymentId: capturedPayment.id,
+                        paidAt: new Date(capturedPayment.created_at * 1000).toISOString()
+                    });
+                } else {
+                    // Genuinely not paid on Razorpay side
+                    const latestStatus = payments.items.length > 0 ? payments.items[0].status : 'no payments';
+                    results.genuinelyPending.push({
+                        id: reg.id,
+                        name: reg.fullName,
+                        email: reg.email,
+                        event: reg.event,
+                        amount: reg.amount,
+                        razorpayStatus: latestStatus
+                    });
+                }
+
+                // Rate limit: wait 300ms between Razorpay API calls
+                await new Promise(resolve => setTimeout(resolve, 300));
+
+            } catch (apiError) {
+                results.errors.push({
+                    id: reg.id,
+                    name: reg.fullName,
+                    email: reg.email,
+                    event: reg.event,
+                    orderId: orderId,
+                    error: apiError.message
+                });
+            }
+        }
+
+        // Build summary
+        results.summary = {
+            totalPending: pendingRegistrations.length,
+            fixed: results.fixed.length,
+            genuinelyPending: results.genuinelyPending.length,
+            mockOrders: results.mockOrders.length,
+            noOrderId: results.noOrderId.length,
+            errors: results.errors.length
+        };
+
+        res.json({
+            success: true,
+            message: isDryRun
+                ? `🔍 DRY RUN complete. ${results.fixed.length} payments WOULD be fixed.`
+                : `✅ Fixed ${results.fixed.length} payments successfully!`,
+            ...results
+        });
+
+    } catch (error) {
+        console.error('Auto-fix payments error:', error);
+        res.status(500).json({ error: true, message: error.message });
+    }
+});
+
 module.exports = router;

@@ -12,7 +12,13 @@ router.get('/', async (req, res) => {
         }
 
         // 2. Fetch all registrations (with payment info if needed, but keeping it simple for now)
+        const whereClause = {};
+        if (req.query.event) {
+            whereClause.event = req.query.event;
+        }
+
         const registrations = await Registration.findAll({
+            where: whereClause,
             order: [['createdAt', 'DESC']],
             raw: true // Get plain JSON objects
         });

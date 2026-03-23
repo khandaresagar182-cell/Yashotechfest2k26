@@ -4,31 +4,12 @@ import './Hero.css';
 
 const Hero = () => {
     const navigate = useNavigate();
-    const calculateTimeLeft = () => {
-        const difference = +new Date("2026-02-24") - +new Date();
-        let timeLeft = {};
-
-        if (difference > 0) {
-            timeLeft = {
-                days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-                hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-                minutes: Math.floor((difference / 1000 / 60) % 60),
-                seconds: Math.floor((difference / 1000) % 60)
-            };
-        } else {
-            timeLeft = { days: 0, hours: 0, minutes: 0, seconds: 0 };
-        }
-        return timeLeft;
-    };
-
-    const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+    const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
-        const timer = setInterval(() => {
-            setTimeLeft(calculateTimeLeft());
-        }, 1000);
-
-        return () => clearInterval(timer);
+        // Trigger entrance animations
+        const timer = setTimeout(() => setIsVisible(true), 100);
+        return () => clearTimeout(timer);
     }, []);
 
     const handleExplore = () => {
@@ -38,9 +19,23 @@ const Hero = () => {
         }
     };
 
+    const highlights = [
+        { icon: '👥', value: '500+', label: 'Participants' },
+        { icon: '🏆', value: '30+', label: 'Events' },
+        { icon: '🏛️', value: '6', label: 'Departments' },
+        { icon: '🎯', value: '₹50K+', label: 'Prize Pool' },
+    ];
+
     return (
-        <section className="hero">
-            <div className="hero-container">
+        <section className="hero hero-ended">
+            {/* Floating particles */}
+            <div className="particles">
+                {[...Array(12)].map((_, i) => (
+                    <div key={i} className={`particle particle-${i + 1}`} />
+                ))}
+            </div>
+
+            <div className={`hero-container ${isVisible ? 'fade-in' : ''}`}>
                 <div className="hero-badge">STATE LEVEL TECHNICAL COMPETITION</div>
                 <div className="hero-title">
                     <span className="title-yashotech">YASHOTECH</span>
@@ -49,23 +44,56 @@ const Hero = () => {
 
                 <p className="hero-tagline">"Think it, Crack it, Lead it."</p>
 
-                <div className="live-banner-container">
-                    <div className="live-banner">
-                        <div className="live-text">FEST IS LIVE 🚀</div>
-                        <div className="live-subtext">Welcome to Yashotech Fest 2K26</div>
+                {/* Fest Ended Banner */}
+                <div className="ended-banner-container">
+                    <div className="ended-banner">
+                        <div className="ended-icon-row">
+                            <span className="ended-trophy">🏆</span>
+                        </div>
+                        <div className="ended-text">FEST HAS ENDED</div>
+                        <div className="ended-subtext">
+                            Thank you for making Yashotech Fest 2K26 a grand success!
+                        </div>
+                        <div className="ended-date">
+                            <span className="ended-date-icon">📅</span>
+                            24 February 2026 — What a day it was!
+                        </div>
                     </div>
                 </div>
 
+                {/* Highlights */}
+                <div className="highlights-grid">
+                    {highlights.map((item, idx) => (
+                        <div
+                            key={idx}
+                            className="highlight-card"
+                            style={{ animationDelay: `${0.2 + idx * 0.15}s` }}
+                        >
+                            <div className="highlight-icon">{item.icon}</div>
+                            <div className="highlight-value">{item.value}</div>
+                            <div className="highlight-label">{item.label}</div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* CTA Buttons */}
                 <div className="hero-buttons">
-                    <button className="btn-explore desktop-only" onClick={handleExplore}>Explore Now</button>
-                    <button className="btn-explore mobile-only" onClick={() => navigate('/events')}>Register Now</button>
-                    <button className="btn-prize">⭕ 24 Feb 2026</button>
+                    <button className="btn-explore desktop-only" onClick={handleExplore}>
+                        View Event Results
+                    </button>
+                    <button className="btn-explore mobile-only" onClick={() => navigate('/events')}>
+                        View Event Results
+                    </button>
+                    <button className="btn-prize" onClick={() => navigate('/gallery')}>
+                        📸 View Gallery
+                    </button>
                 </div>
 
                 <div className="scroll-indicator">⌄</div>
-            </div >
-        </section >
+            </div>
+        </section>
     );
 };
 
 export default Hero;
+
